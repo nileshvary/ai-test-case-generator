@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 220" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="AI Test Case Generator workflow: Form to Google Gemini to Parse JSON to Jira">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9b8cff"/>
+    </marker>
+  </defs>
+
+  <!-- connectors -->
+  <line x1="212" y1="120" x2="250" y2="120" stroke="#9b8cff" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="442" y1="120" x2="480" y2="120" stroke="#9b8cff" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="672" y1="120" x2="710" y2="120" stroke="#9b8cff" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- title -->
+  <text x="20" y="34" font-size="18" font-weight="700" fill="#7E57C2">AI Test Case Generator</text>
+  <text x="20" y="56" font-size="12.5" fill="#8a8a8a">Describe it once &#8226; AI writes the cases &#8226; tickets land in Jira</text>
+
+  <!-- node 1 -->
+  <g>
+    <rect x="20" y="80" width="192" height="82" rx="12" fill="#f3f0ff" stroke="#b3a2e0" stroke-width="1.5"/>
+    <rect x="20" y="80" width="6" height="82" rx="3" fill="#7E57C2"/>
+    <text x="40" y="112" font-size="14.5" font-weight="700" fill="#3a2f52">1 &#183; Form</text>
+    <text x="40" y="134" font-size="12" fill="#6b6b6b">Device &#183; Scope</text>
+    <text x="40" y="150" font-size="12" fill="#6b6b6b">&#183; Count</text>
+  </g>
+
+  <!-- node 2 -->
+  <g>
+    <rect x="250" y="80" width="192" height="82" rx="12" fill="#f3f0ff" stroke="#b3a2e0" stroke-width="1.5"/>
+    <rect x="250" y="80" width="6" height="82" rx="3" fill="#7E57C2"/>
+    <text x="270" y="112" font-size="14.5" font-weight="700" fill="#3a2f52">2 &#183; Google Gemini</text>
+    <text x="270" y="134" font-size="12" fill="#6b6b6b">generate structured</text>
+    <text x="270" y="150" font-size="12" fill="#6b6b6b">test cases (JSON)</text>
+  </g>
+
+  <!-- node 3 -->
+  <g>
+    <rect x="480" y="80" width="192" height="82" rx="12" fill="#f3f0ff" stroke="#b3a2e0" stroke-width="1.5"/>
+    <rect x="480" y="80" width="6" height="82" rx="3" fill="#7E57C2"/>
+    <text x="500" y="112" font-size="14.5" font-weight="700" fill="#3a2f52">3 &#183; Parse JSON</text>
+    <text x="500" y="134" font-size="12" fill="#6b6b6b">one item per</text>
+    <text x="500" y="150" font-size="12" fill="#6b6b6b">test case</text>
+  </g>
+
+  <!-- node 4 -->
+  <g>
+    <rect x="710" y="80" width="192" height="82" rx="12" fill="#f3f0ff" stroke="#b3a2e0" stroke-width="1.5"/>
+    <rect x="710" y="80" width="6" height="82" rx="3" fill="#7E57C2"/>
+    <text x="730" y="112" font-size="14.5" font-weight="700" fill="#3a2f52">4 &#183; Jira</text>
+    <text x="730" y="134" font-size="12" fill="#6b6b6b">create a Task</text>
+    <text x="730" y="150" font-size="12" fill="#6b6b6b">per test case</text>
+  </g>
+</svg>

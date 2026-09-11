@@ -22,11 +22,11 @@ flowchart LR
 3. **Parse JSON** — a small code step splits the AI output into one item per test case (`test_id`, `title`, `category`, `priority`, `preconditions`, `steps`, `test_data`, `expected_result`).
 4. **Jira** — each test case is created as a Task issue, with all details mapped into the description.
 
-### Screenshot
+### Workflow diagram
 
-> _Add a screenshot of the workflow canvas here (`assets/workflow.png`)._
+![AI Test Case Generator workflow](assets/workflow.svg)
 
-![Workflow](assets/workflow.png)
+> _Prefer the live n8n canvas? Add a screenshot as `assets/workflow.png` and swap the link above._
 
 ---
 
