@@ -24,9 +24,7 @@ flowchart LR
 
 ### Workflow diagram
 
-![AI Test Case Generator workflow](assets/workflow.svg)
-
-> _Prefer the live n8n canvas? Add a screenshot as `assets/workflow.png` and swap the link above._
+![AI Test Case Generator workflow](assets/workflow.png)
 
 ---
 
