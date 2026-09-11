@@ -69,7 +69,7 @@ flowchart LR
 ## Notes & gotchas
 
 - **Choosing a model:** pick a fast, cost-effective model from your provider (most have a small "mini"/"flash" tier that's ideal here). If a model name is rejected, just select a current one your account has access to.
-- **Jira free plan:** the free tier has no Xray/Zephyr "Test" issue type, so test cases are created as **Task** issues with the steps/expected result in the description. Upgrade later to remap to a dedicated Test type.
+- **Jira Test types:** if your Jira plan doesn't include Xray/Zephyr, there's no dedicated "Test" issue type, so test cases are created as **Task** issues with the steps/expected result in the description. With Xray/Zephyr you can remap to a Test type.
 - **Privacy:** everything runs on your own n8n; your keys stay in n8n's credential store and nothing is exposed publicly unless you choose to.
 
 ---

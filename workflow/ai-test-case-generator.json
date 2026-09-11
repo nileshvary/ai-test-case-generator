@@ -75,7 +75,7 @@
     },
     {
       "parameters": {
-        "content": "## AI Test Case Generator\nAuto-writes QA test cases from a short description and files them in Jira.\n\n**What it does**\n- Form: describe the device + scope\n- Gemini generates detailed test cases\n- Each becomes a Jira ticket\n\n**Great for:** VPN, QNAP/Synology NAS, multicast (IGMP), firewalls, APIs\n\n**Requirements**\n- Google Gemini API key (free tier)\n- Jira Cloud API token",
+        "content": "## AI Test Case Generator\nAuto-writes QA test cases from a short description and files them in Jira.\n\n**What it does**\n- Form: describe the device + scope\n- AI generates detailed test cases\n- Each becomes a Jira ticket\n\n**Great for:** VPN, QNAP/Synology NAS, multicast (IGMP), firewalls, APIs\n\n**Requirements**\n- An LLM API key (your provider)\n- Jira Cloud API token",
         "height": 320,
         "width": 340,
         "color": 4
@@ -101,7 +101,7 @@
     },
     {
       "parameters": {
-        "content": "### Step 2 - AI generation (Google Gemini)\nModel: **gemini-3.6-flash**.\nPrompted as a senior QA engineer, returns structured test cases (functional, negative, boundary, security, performance) as **strict JSON**.",
+        "content": "### Step 2 - AI generation\nUse any chat-model node (your provider + your API key).\nPrompted as a senior QA engineer, returns structured test cases (functional, negative, boundary, security, performance) as **strict JSON**.",
         "height": 160,
         "width": 250,
         "color": 5
