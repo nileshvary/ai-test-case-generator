@@ -1,0 +1,92 @@
+{
+  "name": "AI Test Case Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "AI Test Case Generator",
+        "formDescription": "Describe what you want to test. The AI generates detailed QA test cases and creates them as Jira issues.",
+        "formFields": {
+          "values": [
+            { "fieldLabel": "Device", "placeholder": "e.g. VPN / QNAP NAS / Synology / Multicast (IGMP) / API / Web app", "requiredField": true },
+            { "fieldLabel": "Scope", "fieldType": "textarea", "placeholder": "Feature, topology and build under test, e.g. IKEv2 reconnection, kill-switch, DNS-leak, wired + wireless clients", "requiredField": true },
+            { "fieldLabel": "Count", "fieldType": "number", "placeholder": "10", "requiredField": false }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "id": "a1b2c3d4-0001-4a11-8f01-000000000001",
+      "name": "On form submission",
+      "webhookId": "a1b2c3d4-0001-4a11-8f01-0000000000ff"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a senior QA engineer specializing in networking, storage and general software testing.\nGenerate {{ $json.Count || 10 }} detailed, professional QA test cases for the following.\n\nDevice / Topic: {{ $json.Device }}\nScope / focus: {{ $json.Scope }}\n\nWhere relevant, cover functional, negative, boundary, security, performance, and interoperability testing.\nReturn ONLY a valid JSON array. No markdown, no code fences, no commentary.\nEach element MUST have exactly these keys:\n\"test_id\" (e.g. TC-001), \"title\", \"category\" (functional|negative|boundary|security|performance|interoperability), \"priority\" (High|Medium|Low), \"preconditions\", \"steps\" (a numbered, multi-line string), \"test_data\", \"expected_result\".",
+        "hasOutputParser": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [240, 0],
+      "id": "a1b2c3d4-0002-4a11-8f01-000000000002",
+      "name": "Generate Test Cases"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.6-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [200, 220],
+      "id": "a1b2c3d4-0003-4a11-8f01-000000000003",
+      "name": "Google Gemini"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const first = $input.first().json;\nlet raw = first.text ?? first.output ?? first.response ?? '';\nlet txt = String(raw).trim();\ntxt = txt.replace(/^```(?:json)?/i, '').replace(/```$/,'').trim();\nconst s = txt.indexOf('[');\nconst e = txt.lastIndexOf(']');\nif (s !== -1 && e !== -1 && e > s) { txt = txt.slice(s, e + 1); }\nlet arr;\ntry { arr = JSON.parse(txt); } catch (err) { throw new Error('AI did not return valid JSON: ' + err.message + ' | got: ' + String(raw).slice(0, 300)); }\nif (!Array.isArray(arr)) { arr = [arr]; }\nreturn arr.map((tc) => ({ json: tc }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [520, 0],
+      "id": "a1b2c3d4-0004-4a11-8f01-000000000004",
+      "name": "Parse JSON"
+    },
+    {
+      "parameters": {
+        "resource": "issue",
+        "operation": "create",
+        "project": "",
+        "issueType": "",
+        "summary": "={{ $json.title }}",
+        "additionalFields": {
+          "description": "=Category: {{ $json.category }}\nPriority: {{ $json.priority }}\n\nPreconditions:\n{{ $json.preconditions }}\n\nSteps:\n{{ $json.steps }}\n\nTest Data:\n{{ $json.test_data }}\n\nExpected Result:\n{{ $json.expected_result }}"
+        }
+      },
+      "type": "n8n-nodes-base.jira",
+      "typeVersion": 1,
+      "position": [760, 0],
+      "id": "a1b2c3d4-0005-4a11-8f01-000000000005",
+      "name": "Create Test Case in Jira"
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [[{ "node": "Generate Test Cases", "type": "main", "index": 0 }]]
+    },
+    "Google Gemini": {
+      "ai_languageModel": [[{ "node": "Generate Test Cases", "type": "ai_languageModel", "index": 0 }]]
+    },
+    "Generate Test Cases": {
+      "main": [[{ "node": "Parse JSON", "type": "main", "index": 0 }]]
+    },
+    "Parse JSON": {
+      "main": [[{ "node": "Create Test Case in Jira", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}

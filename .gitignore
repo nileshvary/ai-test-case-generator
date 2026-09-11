@@ -1,0 +1,12 @@
+# n8n / local
+.n8n/
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Secrets — never commit these
+.env
+*.key
+credentials*.json
